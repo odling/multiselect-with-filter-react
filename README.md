@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# React Multiselect With Filter Implementation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository is prepared to submit response to the [case study](https://docs.google.com/document/d/1WBbK7d7Ft3HE0qPyYmnV_uhyBdjdGBpB8rVId3L-bzs/edit?usp=sharing) given.
 
-## Available Scripts
+**For demonstration purposes, the app is deployed [here](https://multiselect-with-filter-react.vercel.app/).**
 
-In the project directory, you can run:
+The project is bootstrapped with Create React App. Run `npm install` and than `npm start` to test.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### General
+- A resuable MultiSelect component is created and implemented such that is fetches data from Rick And Morty API.
+- The component handles onScrollEnd events enabling pagination through the API.
+- A configurable theme is applied to the component with styled-components.
+- The component supports dark mode with the integrated theme object.
+- Keyboard interactivity is integrated to the component with a custom hook.
+- The component highlights the filter text on the list items. (**Note: since dangerouslySetInnerHtml attribute is used, the text is sanitized using sanitize-html package) to avoid potential security risks.**)
+- The component is able to handle loading state through isLoading prop.
+- The component allows selection and deselection of items and displays the selected items in chips.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+### API Integration
+- RTK query is utilized for fetching data from the server and merging the results enabling pagination with a specific query.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Design System
+- styled-components is used for styling the component.
+- A custom design system is created which provides dark theme support and compatible spacings, font sizes across the app.
 
-### `npm run build`
+### Mouse Interactivity
+- The list items are highlighted and active index is updated based on the mouse over events.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Keyboard Interactivity
+- MultiSelect component uses the `<input />` element as the trigger element for the popover. The trigger keyboard interactions are summarized below.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Key | Action |
+| ----------- | ----------- |
+| `ArrowDown` or `Enter` | Displays the popover and focuses on the first list item |
+| `ArrowUp` or `Esc`| Closes the popover |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- MultiSelect component also handles keyboard interactions within the list items. The interactions are summarized below.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Key | Action |
+| ----------- | ----------- |
+| `ArrowUp` or `Shift+Tab` | Focuses on the previous list item or on the trigger element if there is no other list item above |
+| `ArrowDown` or `Tab`| Focuses on the next list item or on the first item if the end of the list is reached |
+| `Esc` | Closes the popover |
+| `PageUp` or `Home` | Focuses on the first list item |
+| `PageDown` or `End` | Focuses on the last list item |
+| `Enter` or `Space` | Selects or deselects the focused item |
