@@ -88,8 +88,11 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
     const highightItemTitle = useCallback(
       (title: string) => {
         title = sanitizeHtml(title);
-        const regExp = new RegExp(inputValue.trim(), "g");
-        return title.toLowerCase().replace(regExp, "<b>" + inputValue + "</b>");
+        const regExp = new RegExp(inputValue.trim(), "i");
+        return title
+          .toLowerCase()
+          .replace(regExp, "<b>" + inputValue + "</b>")
+          .toLowerCase();
       },
       [inputValue]
     );
