@@ -52,7 +52,10 @@ const Main = styled.main`
 `;
 
 const Panel = styled.div`
-  width: 50%;
+  width: 90%;
+  @media (min-width: ${({ theme }) => theme.breakpoint.md}) {
+    width: 50%;
+  }
   min-height: 100vh;
 `;
 
