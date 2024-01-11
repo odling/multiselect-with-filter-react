@@ -132,8 +132,6 @@ const ChipText = styled.span`
   line-height: ${({ theme }) => theme.lineHeight.text_sm};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   color: ${({ theme }) => theme.color.foreground};
-  white-space: nowrap;
-  vertical-align: middle;
 `;
 
 const ChipButton = styled.button`
