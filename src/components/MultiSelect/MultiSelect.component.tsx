@@ -35,13 +35,12 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
     } = useToggle(false);
 
     const handleSelectItem = useCallback(
-      (item: IMultiSelectItem) => {
-        const filteredItems = selectedItems.filter(
-          (selectedItem) => selectedItem.id !== item.id
-        );
-        if (filteredItems.length !== selectedItems.length) {
+      (item: IMultiSelectItem, isSelected: boolean) => {
+        if (isSelected) {
           /** Remove the item from selectedItems state */
-          onSelectionChange(filteredItems);
+          onSelectionChange(
+            selectedItems.filter((selectedItem) => selectedItem.id !== item.id)
+          );
         } else {
           /** Add the item to selectedItems state */
           const newSelectedItems = [...selectedItems, item];
@@ -146,7 +145,7 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
                   <Styled.ChipButton
                     type="button"
                     aria-label={`Unselect ${selection.title}`}
-                    onClick={() => handleSelectItem(selection)}
+                    onClick={() => handleSelectItem(selection, true)}
                   >
                     <Styled.Cross />
                   </Styled.ChipButton>
@@ -204,7 +203,7 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
                       tabIndex={isPopoverVisible ? 0 : -1}
                       aria-label={item.title}
                       aria-selected={isFocused}
-                      onClick={() => handleSelectItem(item)}
+                      onClick={() => handleSelectItem(item, isSelected)}
                       onMouseOver={() => setActiveIndex(index)}
                     >
                       <Styled.ItemCheckbox
