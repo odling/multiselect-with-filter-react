@@ -3,7 +3,6 @@ import { ReactComponent as light } from "./assets/light.svg";
 import { ReactComponent as dark } from "./assets/dark.svg";
 
 const Header = styled.header`
-  position: sticky;
   top: 0;
   display: flex;
   justify-content: flex-end;

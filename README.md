@@ -4,7 +4,7 @@ This repository is prepared to submit response to the [case study](https://docs.
 
 **For demonstration purposes, the app is deployed [here](https://multiselect-with-filter-react.vercel.app/).**
 
-The project is bootstrapped with Create React App. Run `npm install` and than `npm start` to test.
+The project is bootstrapped with Create React App. Run `npm install` and then `npm start` to test.
 
 ## Features
 
@@ -14,7 +14,7 @@ The project is bootstrapped with Create React App. Run `npm install` and than `n
 - A configurable theme is applied to the component with styled-components.
 - The component supports dark mode with the integrated theme object.
 - Keyboard interactivity is integrated to the component with a custom hook.
-- The component highlights the filter text on the list items. (**Note: since dangerouslySetInnerHtml attribute is used, the text is sanitized using sanitize-html package) to avoid potential security risks.**)
+- The component highlights the filter text on the list items. (**Note: since dangerouslySetInnerHTML attribute is used, the text is sanitized using sanitize-html package) to avoid potential security risks.**)
 - The component is able to handle loading state through isLoading prop.
 - The component allows selection and deselection of items and displays the selected items in chips.
 

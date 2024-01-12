@@ -1,8 +1,4 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useImperativeHandle,
-} from "react";
+import React, { forwardRef, useCallback, useImperativeHandle } from "react";
 import { IMultiSelectItem, IMultiSelectProps } from "./MultiSelect.interface";
 import * as Styled from "./MultiSelect.styles";
 import {
@@ -103,12 +99,26 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
 
     const highightItemTitle = useCallback(
       (title: string) => {
-        title = sanitizeHtml(title).toLowerCase();
+        /** Sanitize the title since dangerouslySetInnerHTML attribute is used*/
+        title = sanitizeHtml(title);
+
+        /** Find the first occurance of the input value */
+        /** Do the comparison in lowercase versions only */
+        const lowerCaseTitle = title.toLowerCase();
         const lowerCaseInputValue =
-          triggerRef.current?.value.toLowerCase() ?? "";
-        const regExp = new RegExp(lowerCaseInputValue.trim(), "i");
-        return title.replace(regExp, "<b>" + lowerCaseInputValue + "</b>");
+          triggerRef.current?.value.trim().toLowerCase() ?? "";
+
+        const firstIndex = lowerCaseTitle.indexOf(lowerCaseInputValue);
+        const lastIndex = firstIndex + lowerCaseInputValue.length;
+
+        /** Use the indexes in the original text (not lowercase version) */
+        return (
+          title.slice(0, firstIndex) +
+          `<b>${title.slice(firstIndex, lastIndex)}</b>` +
+          title.slice(lastIndex)
+        );
       },
+
       [triggerRef]
     );
 
