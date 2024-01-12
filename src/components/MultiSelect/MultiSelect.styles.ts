@@ -152,8 +152,8 @@ const ChipButton = styled.button`
 `;
 
 const Cross = styled(cross)`
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
 `;
 
 const Button = styled.button`
