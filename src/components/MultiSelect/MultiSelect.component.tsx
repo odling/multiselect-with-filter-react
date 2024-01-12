@@ -61,7 +61,7 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
 
     const handleScrollEnd: React.UIEventHandler<HTMLUListElement> = useCallback(
       (e) => {
-        const onScrollEndDebounced = debounce(onEndScroll, 100, {
+        const onScrollEndDebounced = debounce(onEndScroll, 200, {
           trailing: true,
         });
 
