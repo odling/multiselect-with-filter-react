@@ -1,8 +1,8 @@
 # React Multiselect With Filter Implementation
 
-This repository is prepared to submit response to the [case study](https://docs.google.com/document/d/1WBbK7d7Ft3HE0qPyYmnV_uhyBdjdGBpB8rVId3L-bzs/edit?usp=sharing) given.
+This repository is published to demonstrate building a dynamic multiselect component with React and Typescript. An example implementation is prepared using Rick and Morty API.
 
-**For demonstration purposes, the app is deployed [here](https://multiselect-with-filter-react.vercel.app/).**
+**For demonstration purposes, the app is hosted [here](https://multiselect-with-filter-react.vercel.app/).**
 
 The project is bootstrapped with Create React App. Run `npm install` and then `npm start` to test.
 
