@@ -2,7 +2,6 @@ import React, {
   forwardRef,
   useCallback,
   useImperativeHandle,
-  useState,
 } from "react";
 import { IMultiSelectItem, IMultiSelectProps } from "./MultiSelect.interface";
 import * as Styled from "./MultiSelect.styles";
@@ -17,11 +16,11 @@ import sanitizeHtml from "sanitize-html";
 const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
   function MultiSelect(props, ref) {
     const {
-      inputValue,
       items,
       name,
       label,
       onInputChange,
+      selectedItems,
       onSelectionChange,
       placeholder,
       isLoading,
@@ -39,10 +38,6 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
       toggle: togglePopoverVisibility,
     } = useToggle(false);
 
-    const [selectedItems, setSelectedItems] = useState<
-      IMultiSelectProps["items"]
-    >([]);
-
     const handleSelectItem = useCallback(
       (item: IMultiSelectItem) => {
         const filteredItems = selectedItems.filter(
@@ -50,12 +45,10 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
         );
         if (filteredItems.length !== selectedItems.length) {
           /** Remove the item from selectedItems state */
-          setSelectedItems(filteredItems);
           onSelectionChange(filteredItems);
         } else {
           /** Add the item to selectedItems state */
           const newSelectedItems = [...selectedItems, item];
-          setSelectedItems(newSelectedItems);
           onSelectionChange(newSelectedItems);
         }
       },
@@ -85,16 +78,6 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
       [onEndScroll]
     );
 
-    const highightItemTitle = useCallback(
-      (title: string) => {
-        title = sanitizeHtml(title).toLowerCase();
-        const lowerCaseInputValue = inputValue.toLowerCase();
-        const regExp = new RegExp(lowerCaseInputValue.trim(), "i");
-        return title.replace(regExp, "<b>" + lowerCaseInputValue + "</b>");
-      },
-      [inputValue]
-    );
-
     const {
       isOpen: isTriggerFocused,
       open: setTriggerFocused,
@@ -117,6 +100,17 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
 
     const { ref: containerRef } =
       useOutsideClick<HTMLDivElement>(handleOutsideClick);
+
+    const highightItemTitle = useCallback(
+      (title: string) => {
+        title = sanitizeHtml(title).toLowerCase();
+        const lowerCaseInputValue =
+          triggerRef.current?.value.toLowerCase() ?? "";
+        const regExp = new RegExp(lowerCaseInputValue.trim(), "i");
+        return title.replace(regExp, "<b>" + lowerCaseInputValue + "</b>");
+      },
+      [triggerRef]
+    );
 
     useImperativeHandle(ref, () => containerRef.current as HTMLDivElement, [
       containerRef,
@@ -154,7 +148,6 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
             ref={triggerRef}
             id={`${name}-input`}
             type="text"
-            value={inputValue}
             placeholder={placeholder}
             aria-label={label || `${name}-input`}
             autoComplete="off"

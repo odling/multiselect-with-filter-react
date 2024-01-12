@@ -17,14 +17,14 @@ export interface IMultiSelectProps
   name: string;
   /** The text to display as the label. */
   label?: string;
-  /** The value of the MultiSelect input. */
-  inputValue: string;
   /** Handler that is called when the MultiSelect input value changes. */
   onInputChange?: (value: string) => void;
   /** Handler that is called when Multiselect selection changes */
   onSelectionChange?: (selectedItems: IMultiSelectItem[]) => void;
   /** The list of MultiSelect items. */
   items: Array<IMultiSelectItem>;
+  /** Selected items that are rendered in chips (controlled) */
+  selectedItems: Array<IMultiSelectItem>;
   /** Temporary text that occupies the text input when it is empty. */
   placeholder?: string;
   /** The boolean prop to display spinner in popover list */
