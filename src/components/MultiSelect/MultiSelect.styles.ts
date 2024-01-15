@@ -20,7 +20,6 @@ const Label = styled.label`
 
 const InputWrap = styled.div`
   display: flex;
-  min-height: 40px;
   gap: ${({ theme }) => theme.spacing["2"]};
   padding: ${({ theme }) =>
     `${theme.spacing["1"]} ${theme.spacing["3"]} ${theme.spacing["1"]} ${theme.spacing["1"]}`};
@@ -66,6 +65,7 @@ const Input = styled.input`
   -webkit-appearance: none;
   appearance: none;
   align-self: center;
+  min-height: 28px;
 
   background-color: transparent;
 
