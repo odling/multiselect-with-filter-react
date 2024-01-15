@@ -1,8 +1,8 @@
 # React Multiselect With Filter Implementation
 
-This repository is published to demonstrate building a dynamic multiselect component with React and Typescript. An example implementation is prepared using Rick and Morty API.
+This repository is published to demonstrate a dynamic multiselect componen implementation with React and Typescript. An example app is created and hosted which utilizes Rick and Morty API.
 
-**For demonstration purposes, the app is hosted [here](https://multiselect-with-filter-react.vercel.app/).**
+**For demonstration purposes, the example app is hosted [here](https://multiselect-with-filter-react.vercel.app/).**
 
 The project is bootstrapped with Create React App. Run `npm install` and then `npm start` to test.
 
@@ -14,7 +14,7 @@ The project is bootstrapped with Create React App. Run `npm install` and then `n
 - A configurable theme is applied to the component with styled-components.
 - The component supports dark mode with the integrated theme object.
 - Keyboard interactivity is integrated to the component with a custom hook.
-- The component highlights the filter text on the list items. (**Note: since dangerouslySetInnerHTML attribute is used, the text is sanitized using sanitize-html package) to avoid potential security risks.**)
+- The component highlights the filter text on the list items. (**Note: since dangerouslySetInnerHTML attribute is used, the text is sanitized using sanitize-html package to avoid potential security risks.**)
 - The component is able to handle loading state through isLoading prop.
 - The component allows selection and deselection of items and displays the selected items in chips.
 
