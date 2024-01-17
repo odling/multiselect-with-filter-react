@@ -206,6 +206,7 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
                           id={`${item.id}-checkbox`}
                           type="checkbox"
                           readOnly
+                          aria-readonly="true"
                           tabIndex={-1}
                           aria-labelledby={`${name}-element-${item.id}`}
                           checked={isSelected}
