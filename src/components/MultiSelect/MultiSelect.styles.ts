@@ -67,6 +67,7 @@ const Input = styled.input`
   appearance: none;
   align-self: center;
 
+  min-height: 28px;
   background-color: transparent;
 
   font-size: ${({ theme }) => theme.fontSize.text_md};
@@ -121,7 +122,6 @@ const Chip = styled.li`
   align-items: center;
   justify-content: center;
 
-  min-height: 28px;
   gap: ${({ theme }) => theme.spacing["1.5"]};
   padding: ${({ theme }) => `${theme.spacing["1"]} ${theme.spacing["2"]}`};
   border-radius: ${({ theme }) => theme.borderRadius.standard};
