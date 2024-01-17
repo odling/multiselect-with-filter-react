@@ -137,38 +137,99 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
           </Styled.Label>
         )}
         <Styled.InputWrap>
-          {selectedItems.length > 0 && (
-            <Styled.ChipList>
-              {selectedItems.map((selection) => (
-                <Styled.Chip key={`${name}-selection-${selection.id}`}>
-                  <Styled.ChipText>{selection.title}</Styled.ChipText>
-                  <Styled.ChipButton
-                    type="button"
-                    aria-label={`Unselect ${selection.title}`}
-                    onClick={() => handleSelectItem(selection, true)}
-                  >
-                    <Styled.Cross />
-                  </Styled.ChipButton>
-                </Styled.Chip>
-              ))}
-            </Styled.ChipList>
-          )}
-          <Styled.Input
-            ref={triggerRef}
-            id={`${name}-input`}
-            type="text"
-            placeholder={placeholder}
-            aria-label={label || `${name}-input`}
-            autoComplete="off"
-            aria-haspopup="listbox"
-            role="combobox"
-            aria-expanded={isPopoverVisible}
-            aria-controls={`${name}-popover`}
-            onFocus={setTriggerFocused}
-            onBlur={setTriggerBlurred}
-            onChange={handleInputChange}
-            onClick={displayPopover}
-          />
+          <Styled.ChipList>
+            {selectedItems.map((selection) => (
+              <Styled.Chip key={`${name}-selection-${selection.id}`}>
+                <Styled.ChipText>{selection.title}</Styled.ChipText>
+                <Styled.ChipButton
+                  type="button"
+                  aria-label={`Unselect ${selection.title}`}
+                  onClick={() => handleSelectItem(selection, true)}
+                >
+                  <Styled.Cross />
+                </Styled.ChipButton>
+              </Styled.Chip>
+            ))}
+            <Styled.Input
+              ref={triggerRef}
+              id={`${name}-input`}
+              type="text"
+              placeholder={placeholder}
+              aria-label={label || `${name}-input`}
+              autoComplete="off"
+              aria-haspopup="listbox"
+              role="combobox"
+              aria-expanded={isPopoverVisible}
+              aria-controls={`${name}-popover`}
+              onFocus={setTriggerFocused}
+              onBlur={setTriggerBlurred}
+              onChange={handleInputChange}
+              onClick={displayPopover}
+            />
+            <Styled.Popover>
+              <Styled.SelectionList
+                id={`${name}-popover`}
+                role="listbox"
+                tabIndex={-1}
+                aria-multiselectable="true"
+                onScroll={handleScrollEnd}
+              >
+                {items.length === 0 ? (
+                  <Styled.InfoText>
+                    {!isLoading && "No results found"}
+                  </Styled.InfoText>
+                ) : (
+                  items.map((item, index) => {
+                    const isFocused = activeIndex === index;
+                    const isSelected = selectedItems.some(
+                      (selectedItem) => selectedItem.id === item.id
+                    );
+                    return (
+                      <Styled.SelectItem
+                        ref={isFocused ? itemRef : null}
+                        id={`${name}-element-${item.id}`}
+                        key={item.id}
+                        role="option"
+                        tabIndex={isPopoverVisible ? 0 : -1}
+                        aria-label={item.title}
+                        aria-selected={isFocused}
+                        onClick={() => handleSelectItem(item, isSelected)}
+                        onMouseOver={() => setActiveIndex(index)}
+                      >
+                        <Styled.ItemCheckbox
+                          id={`${item.id}-checkbox`}
+                          type="checkbox"
+                          readOnly
+                          tabIndex={-1}
+                          aria-labelledby={`${name}-element-${item.id}`}
+                          checked={isSelected}
+                        />
+                        <Styled.ItemImage
+                          src={item.imageSrc}
+                          alt={item.title}
+                        ></Styled.ItemImage>
+                        <Styled.ItemInfoContainer>
+                          <Styled.ItemTitle
+                            dangerouslySetInnerHTML={{
+                              __html: highightItemTitle(item.title),
+                            }}
+                          />
+                          <Styled.ItemDescription>
+                            {item.description}
+                          </Styled.ItemDescription>
+                        </Styled.ItemInfoContainer>
+                      </Styled.SelectItem>
+                    );
+                  })
+                )}
+                {isLoading && (
+                  <Styled.SpinnerContainer>
+                    <Styled.Spinner />
+                  </Styled.SpinnerContainer>
+                )}
+              </Styled.SelectionList>
+            </Styled.Popover>
+          </Styled.ChipList>
           <Styled.Button
             tabIndex={-1}
             onClick={togglePopoverVisibility}
@@ -176,69 +237,6 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
           >
             {isPopoverVisible ? <Styled.ArrowUp /> : <Styled.ArrowDown />}
           </Styled.Button>
-          <Styled.Popover>
-            <Styled.SelectionList
-              id={`${name}-popover`}
-              role="listbox"
-              tabIndex={-1}
-              aria-multiselectable="true"
-              onScroll={handleScrollEnd}
-            >
-              {items.length === 0 ? (
-                <Styled.InfoText>
-                  {!isLoading && "No results found"}
-                </Styled.InfoText>
-              ) : (
-                items.map((item, index) => {
-                  const isFocused = activeIndex === index;
-                  const isSelected = selectedItems.some(
-                    (selectedItem) => selectedItem.id === item.id
-                  );
-                  return (
-                    <Styled.SelectItem
-                      ref={isFocused ? itemRef : null}
-                      id={`${name}-element-${item.id}`}
-                      key={item.id}
-                      role="option"
-                      tabIndex={isPopoverVisible ? 0 : -1}
-                      aria-label={item.title}
-                      aria-selected={isFocused}
-                      onClick={() => handleSelectItem(item, isSelected)}
-                      onMouseOver={() => setActiveIndex(index)}
-                    >
-                      <Styled.ItemCheckbox
-                        id={`${item.id}-checkbox`}
-                        type="checkbox"
-                        readOnly
-                        tabIndex={-1}
-                        aria-labelledby={`${name}-element-${item.id}`}
-                        checked={isSelected}
-                      />
-                      <Styled.ItemImage
-                        src={item.imageSrc}
-                        alt={item.title}
-                      ></Styled.ItemImage>
-                      <Styled.ItemInfoContainer>
-                        <Styled.ItemTitle
-                          dangerouslySetInnerHTML={{
-                            __html: highightItemTitle(item.title),
-                          }}
-                        />
-                        <Styled.ItemDescription>
-                          {item.description}
-                        </Styled.ItemDescription>
-                      </Styled.ItemInfoContainer>
-                    </Styled.SelectItem>
-                  );
-                })
-              )}
-              {isLoading && (
-                <Styled.SpinnerContainer>
-                  <Styled.Spinner />
-                </Styled.SpinnerContainer>
-              )}
-            </Styled.SelectionList>
-          </Styled.Popover>
         </Styled.InputWrap>
       </Styled.Container>
     );

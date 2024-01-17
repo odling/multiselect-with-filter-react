@@ -20,6 +20,7 @@ const Label = styled.label`
 
 const InputWrap = styled.div`
   display: flex;
+  justify-content: space-between;
   gap: ${({ theme }) => theme.spacing["2"]};
   padding: ${({ theme }) =>
     `${theme.spacing["1"]} ${theme.spacing["3"]} ${theme.spacing["1"]} ${theme.spacing["1"]}`};
@@ -59,13 +60,11 @@ const Popover = styled.div`
 
 const Input = styled.input`
   flex: 1;
-  min-width: 30%;
   border: none;
   outline: none;
   -webkit-appearance: none;
   appearance: none;
   align-self: center;
-  min-height: 28px;
 
   background-color: transparent;
 
@@ -110,6 +109,8 @@ const Input = styled.input`
 const ChipList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  min-height: 28px;
+  flex: 1;
   gap: ${({ theme }) => theme.spacing["1"]};
 `;
 
