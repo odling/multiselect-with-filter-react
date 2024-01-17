@@ -79,10 +79,16 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
       close: setTriggerBlurred,
     } = useToggle(false);
 
+    const {
+      isOpen: isButtonFocused,
+      open: setButtonFocused,
+      close: setButtonBlurred,
+    } = useToggle(false);
+
     const { activeIndex, setActiveIndex, itemRef, triggerRef } =
       useAccessibleMultiSelect({
         isPopoverVisible,
-        isFocus: isTriggerFocused,
+        isFocus: isTriggerFocused || isButtonFocused,
         openAction: displayPopover,
         closeAction: hidePopover,
         optionsLength: items.length,
@@ -231,7 +237,8 @@ const MultiSelect = forwardRef<HTMLDivElement, IMultiSelectProps>(
             </Styled.Popover>
           </Styled.ChipList>
           <Styled.Button
-            tabIndex={-1}
+            onFocus={setButtonFocused}
+            onBlur={setButtonBlurred}
             onClick={togglePopoverVisibility}
             aria-labelledby={`${name}-input`}
           >

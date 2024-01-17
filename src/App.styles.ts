@@ -22,7 +22,7 @@ const ThemeButton = styled.button`
   fill: ${({ theme }) => theme.color.foreground};
 
   transition: outline 0.2s;
-  &:focus {
+  &:focus-visible {
     outline: ${({ theme }) =>
       `${theme.borderWidth.thin} solid ${theme.color.foreground}`};
   }

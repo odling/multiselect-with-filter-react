@@ -21,6 +21,7 @@ const Label = styled.label`
 const InputWrap = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing["2"]};
   padding: ${({ theme }) =>
     `${theme.spacing["1"]} ${theme.spacing["3"]} ${theme.spacing["1"]} ${theme.spacing["1"]}`};
@@ -161,9 +162,15 @@ const Button = styled.button`
   outline: none;
   cursor: ${({ disabled }) => (disabled ? "initial" : "pointer")};
   display: flex;
+  height: fit-content;
   align-items: center;
   justify-content: center;
   fill: ${({ theme }) => theme.color.foreground};
+
+  &:focus-visible {
+    outline: ${({ theme }) =>
+      `${theme.borderWidth.thin} solid ${theme.color.primary500}`};
+  }
 `;
 
 const ArrowDown = styled(chevronDown)`
