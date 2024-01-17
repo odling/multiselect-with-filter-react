@@ -120,6 +120,8 @@ const Chip = styled.li`
   width: fit-content;
   align-items: center;
   justify-content: center;
+
+  min-height: 28px;
   gap: ${({ theme }) => theme.spacing["1.5"]};
   padding: ${({ theme }) => `${theme.spacing["1"]} ${theme.spacing["2"]}`};
   border-radius: ${({ theme }) => theme.borderRadius.standard};
