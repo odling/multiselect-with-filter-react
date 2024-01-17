@@ -67,7 +67,7 @@ const Input = styled.input`
   appearance: none;
   align-self: center;
 
-  min-height: 28px;
+  height: 28px;
   background-color: transparent;
 
   font-size: ${({ theme }) => theme.fontSize.text_md};
